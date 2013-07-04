@@ -42,10 +42,10 @@ sub start {
         return;
     }
     
+    my $run = 1;
+    
     # Child
     try {
-        my $run = 1;
-        
         local $SIG{TERM} = sub { $run = 0 };
         
         while ($run) {
@@ -53,7 +53,8 @@ sub start {
         }
     }
     catch {
-        debug "Unhandled exception '$_'; exiting.";
+        debug "Unhandled exception '$_'; exiting."
+            if $run;
     };
     
     exit 0;
