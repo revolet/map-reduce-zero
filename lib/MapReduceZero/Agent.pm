@@ -47,6 +47,7 @@ sub start {
     # Child
     try {
         local $SIG{TERM} = sub { $run = 0 };
+        local $SIG{INT}  = sub { $run = 0 };
         
         while ($run) {
             $self->run();
